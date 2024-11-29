@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+skinparam usercase {
+  BackgroundColor << COMBATTIMENTO >> red
+}
+
+left to right direction
+skinparam actorStyle awesome
+actor User as User
+User -> (Avventura Start)
+(Avventura Start) -> (Stanze[n])
+(Avventura Start) -> (Stanza)
+(Avventura Start) -> (Personaggio)
+(Avventura Start) -> (Entità[])
+(Avventura Start) ---> (COMBATTIMENTO)
+(Avventura Start) -> (AVANZA STANZA)
+(Avventura Start) -> (INDIETRO)
+(INDIETRO) -> (Stanze[n])  #line:red;line.bold;text:black :ritornare nella vecchia stanza
+(Stanze[n]) -> (Stanza[0] è sempre quella attuale)
+(AVANZA STANZA) -> (check se tutti i mostri sono morti)
+(check se tutti i mostri sono morti) -> (nuova stanza)
+(nuova stanza) ---> (numero random quanti mostri ci sono e tutte le loro stats)
+(Avventura Start) --> (Math.random)
+(Math.random) -> (numero entità in stanza)
+(Math.random) --> (numero random tipo di bottino) #line:red;line.bold;text:red
+(Math.random) --> (numero random proprietà bottino) #line:red;line.bold;text:red
+(Math.random) --> (numero random quanti mostri ci sono e tutte le loro stats) #line:red;line.bold;text:red
+(numero random quanti mostri ci sono e tutte le loro stats) --> (Stanza)
+(numero random tipo di bottino) -> (Bottino)
+(numero random proprietà bottino) -> (Bottino)
+(numero entità in stanza) -> (Entità[])
+(Entità[]) -> (Bottino)
+(COMBATTIMENTO) -> (danni subiti)
+(COMBATTIMENTO) -> (pozione)
+(COMBATTIMENTO) -> (CambioArma)
+(COMBATTIMENTO) -> (danni danni inflitti)
+
+@enduml
