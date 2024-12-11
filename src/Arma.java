@@ -10,10 +10,10 @@ public class Arma extends Oggetto{
 
     @Override
     public String toString() {
-        return "Arma{" +
+        return super.getNome()+" {" +
                 "\ntipoDanno = '" + tipoDanno + '\'' +
                 "\ndanno = " + danno +
-                '}';
+                "\n}";
     }
 
     public String getTipoDanno() {
