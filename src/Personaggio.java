@@ -65,7 +65,7 @@ public class Personaggio extends Entita {
             }
 
             System.out.println(ConsoleColors.RED+"Hai subito " + danniDopoDifesa+ConsoleColors.YELLOW_BOLD);
-            super.setPuntiVita(danniDopoDifesa);
+            super.setPuntiVita(super.getPuntiVita()-danniDopoDifesa);
         } else {
             System.out.println("Equipaggiamento mancante, impossibile calcolare danni.");
         }
