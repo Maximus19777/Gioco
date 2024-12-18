@@ -8,7 +8,6 @@ public class Avventura {
     private int numeroStanze;
     private Scanner sc = new Scanner(System.in);
 
-    // Array di nomi per generare un nome casuale per le armi
     private static final String[] NOMI_ARMI = {"Excalibur", "Spada di Fuoco", "Spada di Ghiaccio", "Spada della Luce", "Spada dell'Oscurità"};
 
     public Avventura(int numeroStanze) {
@@ -18,15 +17,13 @@ public class Avventura {
 
     public void inizia() {
 
-        // Creazione del personaggio
+
         personaggio = new Personaggio("Dhort", 100, 20, 10, 5, 1, 0);
 
-        // Assegna un'arma iniziale al personaggio
         Arma armaIniziale = createRandomWeapon();
 
-        // Aggiungi l'arma al primo equipaggiamento dello zaino (senza armatura)
         Zaino.Equipaggiamento equipaggiamentoIniziale = new Zaino.Equipaggiamento(armaIniziale, null);
-        personaggio.getZaino().setEquipaggiamenti(new Zaino.Equipaggiamento[]{equipaggiamentoIniziale, null}); // Imposta l'equipaggiamento
+        personaggio.getZaino().setEquipaggiamenti(new Zaino.Equipaggiamento[]{equipaggiamentoIniziale, null});
 
         for (int i = 0; i < numeroStanze; i++) {
             int livelloStanza = i + 1;
@@ -78,12 +75,11 @@ public class Avventura {
         return new Mostro(nomeMostro, puntiVita, forza, difesaFisica, difesaMagica, tipoAttacco, esperienza, bottino);
     }
 
-    // Metodo per creare un oggetto (arma, armatura, pozione)
     private Oggetto creaOggetto() {
         int tipoOggetto = (int) (Math.random() * 3);
         switch (tipoOggetto) {
             case 0:
-                return createRandomWeapon();  // Crea un'arma casuale
+                return createRandomWeapon();
             case 1:
                 return new Armatura("Armatura Magica", "Protezione", "Armatura resistente", "magico", 15);
             case 2:
@@ -93,11 +89,10 @@ public class Avventura {
         }
     }
 
-    // Metodo per creare un'arma casuale con nome e danno
     private Arma createRandomWeapon() {
-        String nomeArma = NOMI_ARMI[(int) (Math.random() * NOMI_ARMI.length)];  // Seleziona un nome casuale
-        int danno = 10 + (int) (Math.random() * 15);  // Danno casuale tra 10 e 25
-        return new Arma(nomeArma, "Taglio", "Spada potente", "fisico", danno);  // Crea un'arma
+        String nomeArma = NOMI_ARMI[(int) (Math.random() * NOMI_ARMI.length)];
+        int danno = 10 + (int) (Math.random() * 15);
+        return new Arma(nomeArma, "Taglio", "Spada potente", "fisico", danno);
     }
 
     private void combattimento(Stanza stanza) {
@@ -135,7 +130,7 @@ public class Avventura {
                 System.out.println("Hai guadagnato " + mostro.getEsperienza() + " punti esperienza.");
                 if (Math.random() < 0.5) {
                     System.out.println("Il mostro ha lasciato un bottino!");
-                    // Aggiungi il bottino nello zaino del personaggio
+
                     Oggetto bottino = mostro.getBottino();
                     if (bottino != null) {
                         aggiungiBottinoNelloZaino(bottino);
@@ -147,7 +142,6 @@ public class Avventura {
 
     public void aggiungiBottinoNelloZaino(Oggetto bottino) {
         if (bottino instanceof Arma) {
-            // Aggiungi l'arma nello zaino
             Arma arma = (Arma) bottino;
             Zaino.Equipaggiamento[] equipaggiamenti = personaggio.getZaino().getEquipaggiamenti();
 
@@ -158,7 +152,7 @@ public class Avventura {
                 }
             }
 
-            if (numArmi < 2) {  // Controllo se ci sono già 2 armi
+            if (numArmi < 2) {
                 boolean aggiunto = false;
                 for (int i = 0; i < equipaggiamenti.length; i++) {
                     if (equipaggiamenti[i] == null) {
@@ -175,7 +169,6 @@ public class Avventura {
                 System.out.println("Il tuo zaino è pieno, non puoi aggiungere l'arma: " + arma.getNome());
             }
         } else if (bottino instanceof Armatura) {
-            // Aggiungi l'armatura nello zaino
             Armatura armatura = (Armatura) bottino;
             Zaino.Equipaggiamento[] equipaggiamenti = personaggio.getZaino().getEquipaggiamenti();
 
@@ -186,7 +179,7 @@ public class Avventura {
                 }
             }
 
-            if (numArmature < 2) {  // Controllo se ci sono già 2 armature
+            if (numArmature < 2) {
                 boolean aggiunto = false;
                 for (int i = 0; i < equipaggiamenti.length; i++) {
                     if (equipaggiamenti[i] == null) {
@@ -203,7 +196,7 @@ public class Avventura {
                 System.out.println("Il tuo zaino è pieno, non puoi aggiungere l'armatura: " + armatura.getNome());
             }
         }
-        // (gestione delle pozioni rimane invariata)
+
     }
 
 
